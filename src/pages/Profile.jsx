@@ -1,35 +1,8 @@
-import React from 'react';
-import { Avatar, Card, Skeleton } from 'antd';
+import React from 'react'
 
-const Profile = () => {
-  const [loading, setLoading] = useState(true);
-
-  const avatar = loading ? (
-    <Skeleton avatar />
-  ) : (
-    <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxSq.png" />
-  );
-
+export default function Profile() {
   return (
-    <Card title="Profile">
-      {avatar}
-      <Statistic
-        title="Username"
-        value="Bard"
-        description="Your username"
-      />
-      <Statistic
-        title="Email"
-        value="bard@example.com"
-        description="Your email address"
-      />
-      <Statistic
-        title="Joined"
-        value="2023-01-01"
-        description="The date you joined"
-      />
-    </Card>
-  );
-};
+    <div>Profile</div>
+  )
+}
 
-export default Profile;
