@@ -1,142 +1,145 @@
-import { useState } from 'react';
-import { Table, Input, Button, Space } from 'antd';
-import { SearchOutlined } from '@ant-design/icons';
+import React, { useState, useEffect } from 'react';
+import './Pages.css';
+import ProductDetails from '../components/ProductDetails';
 
-const StoreTable = ({ data }) => {
-  const [searchText, setSearchText] = useState('');
-  const [searchedColumn, setSearchedColumn] = useState('');
-
-  const handleSearch = (selectedKeys, confirm, dataIndex) => {
-    confirm();
-    setSearchText(selectedKeys[0]);
-    setSearchedColumn(dataIndex);
-  };
-
-  const handleReset = clearFilters => {
-    clearFilters();
-    setSearchText('');
-  };
-
-  const getColumnSearchProps = dataIndex => ({
-    filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
-      <div style={{ padding: 8 }}>
-        <Input
-          placeholder={`Search ${dataIndex}`}
-          value={selectedKeys[0]}
-          onChange={e => setSelectedKeys(e.target.value ? [e.target.value] : [])}
-          onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
-          style={{ width: 188, marginBottom: 8, display: 'block' }}
-        />
-        <Space>
-          <Button
-            type="primary"
-            onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
-            icon={<SearchOutlined />}
-            size="small"
-            style={{ width: 90 }}
-          >
-            Search
-          </Button>
-          <Button onClick={() => handleReset(clearFilters)} size="small" style={{ width: 90 }}>
-            Reset
-          </Button>
-        </Space>
-      </div>
-    ),
-    filterIcon: filtered => <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined }} />,
-    onFilter: (value, record) =>
-      record[dataIndex] ? record[dataIndex].toString().toLowerCase().includes(value.toLowerCase()) : '',
-    onFilterDropdownVisibleChange: visible => {
-      if (visible) {
-        setTimeout(() => searchInput.select());
-      }
-    },
-    render: text =>
-      searchedColumn === dataIndex ? (
-        <span style={{ fontWeight: 'bold' }}>{text}</span>
-      ) : (
-        text
-      ),
+// Mock API
+const getProductsFromAPI = () => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve([
+        {
+          units: 'Pack',
+          discount: 10,
+          paymentmethod: 'Credit Card',
+          amount: 100,
+          supplier_name: 'Supplier A',
+          supplier: 'Supplier A',
+          category: 'Electronics',
+          id: 1,
+          tax: 5,
+          item_name: 'Product 1',
+          quantity: 5,
+        },
+        // Add more mock data here
+      ]);
+    }, 1000);
   });
+};
 
-  const columns = [
-    {
-      title: 'Tax',
-      dataIndex: 'tax',
-      key: 'tax',
-      ...getColumnSearchProps('tax'),
-    },
-    {
-      title: 'Supplier Name',
-      dataIndex: 'supplier_name',
-      key: 'supplier_name',
-      ...getColumnSearchProps('supplier_name'),
-    },
-    {
-      title: 'Quantity',
-      dataIndex: 'quantity',
-      key: 'quantity',
-      ...getColumnSearchProps('quantity'),
-    },
-    {
-      title: 'Item Name',
-      dataIndex: 'item_name',
-      key: 'item_name',
-      ...getColumnSearchProps('item_name'),
-    },
-    {
-      title: 'Amount',
-      dataIndex: 'amount',
-      key: 'amount',
-      ...getColumnSearchProps('amount'),
-    },
-    {
-      title: 'Supplier',
-      dataIndex: 'supplier',
-      key: 'supplier',
-      ...getColumnSearchProps('supplier'),
-    },
-    {
-      title: 'ID',
-      dataIndex: 'id',
-      key: 'id',
-      ...getColumnSearchProps('id'),
-    },
-    {
-      title: 'Discount',
-      dataIndex: 'discount',
-      key: 'discount',
-      ...getColumnSearchProps('discount'),
-    },
-    {
-      title: 'Units',
-      dataIndex: 'units',
-      key: 'units',
-      ...getColumnSearchProps('units'),
-    },
-    {
-      title: 'Category',
-      dataIndex: 'category',
-      key: 'category',
-      ...getColumnSearchProps('category'),
-    },
-    {
-      title: 'Payment Method',
-      dataIndex: 'paymentmethod',
-      key: 'paymentmethod',
-      ...getColumnSearchProps('paymentmethod'),
-    },
+const deleteProductFromAPI = (id) => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve();
+    }, 500);
+  });
+};
+
+const saveProductToAPI = (product) => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(product);
+    }, 500);
+  });
+};
+
+const ProductManagement = () => {
+  const [products, setProducts] = useState([]);
+  const [newProduct, setNewProduct] = useState(null);
+  const [editingProduct, setEditingProduct] = useState(null);
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
+  const fetchProducts = async () => {
+    const data = await getProductsFromAPI();
+    setProducts(data);
+  };
+
+  const deleteProduct = async (id) => {
+    await deleteProductFromAPI(id);
+    setProducts(products.filter((product) => product.id !== id));
+  };
+
+  const saveProduct = async () => {
+    if (!newProduct) return;
+
+    if (editingProduct) {
+      // Update existing product
+      const updatedProduct = await saveProductToAPI(newProduct);
+      setProducts(products.map((product) => (product.id === updatedProduct.id ? updatedProduct : product)));
+      setEditingProduct(null);
+    } else {
+      // Add new product
+      const product = { ...newProduct };
+      product.id = Date.now(); // Generate a temporary unique ID
+      await saveProductToAPI(product);
+      setProducts([...products, product]);
+    }
+
+    setNewProduct(null);
+  };
+
+  const editProduct = (product) => {
+    setNewProduct(product);
+    setEditingProduct(product.id);
+  };
+
+  const handleEdit = (updatedProduct) => {
+    setNewProduct(updatedProduct);
+  };
+
+  const headers = [
+    { label: 'Item Name', key: 'item_name' },
+    { label: 'Units', key: 'units' },
+    { label: 'Discount', key: 'discount' },
+    { label: 'Payment Method', key: 'paymentmethod' },
+    { label: 'Amount', key: 'amount' },
+    { label: 'Supplier Name', key: 'supplier_name' },
+    { label: 'Supplier', key: 'supplier' },
+    { label: 'Category', key: 'category' },
+    { label: 'Tax', key: 'tax' },
+    { label: 'Quantity', key: 'quantity' },
   ];
 
   return (
-    <Table
-      columns={columns}
-      dataSource={data}
-      pagination={false}
-      size="small"
-      scroll={{ x: 'max-content' }}
-    />
+    <div className="product-management">
+      <h1>Product Management System</h1>
+
+      <div className="product-form">
+        <h2>{editingProduct ? 'Edit Product' : 'Add Product'}</h2>
+        <ProductDetails product={newProduct} handleEdit={handleEdit} />
+        <button onClick={saveProduct}>{editingProduct ? 'Save Changes' : 'Add Product'}</button>
+      </div>
+
+      <div className="product-list">
+        <h2>Product List</h2>
+        <table>
+          <thead>
+            <tr>
+              {headers.map((header) => (
+                <th key={header.key}>{header.label}</th>
+              ))}
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {products.map((product) => (
+              <tr key={product.id}>
+                {headers.map((header) => (
+                  <td key={header.key}>{product[header.key]}</td>
+                ))}
+                <td>
+                  <button onClick={() => editProduct(product)}>Edit</button>
+                  <button onClick={() => deleteProduct(product.id)}>Delete</button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
   );
 };
 
-export default StoreTable;
+export default ProductManagement;

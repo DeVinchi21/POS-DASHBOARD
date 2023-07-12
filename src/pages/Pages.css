@@ -1,10 +1,149 @@
-.ant-card {
-    margin-bottom: 16px;
-    flex: 1;
+.stats{
+    flex-wrap: wrap;
 }
 
-@media (max-width: 768px) {
-    .ant-row {
-        flex-wrap: wrap;
-    }
+.card--img{
+    width: clamp(200px, 400px, 600px);
+    height: auto;
+    border-radius: 1px solid black;
 }
+
+.card {
+    width: 200px;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    flex: 1 1 auto;
+  }
+  
+  .card-icon {
+    font-size: 36px;
+    margin-bottom: 10px;
+  }
+  
+  .card-content {
+    text-align: center;
+  }
+  
+  .card-title {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+  .card-value {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+  }
+
+  .stat--cards{
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+/* Profile.css */
+.profile {
+    width: 300px;
+    padding: 20px;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .profile-header {
+    text-align: center;
+  }
+  
+  .profile-picture {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+  }
+  
+  .profile-name {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .profile-username {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 10px;
+  }
+  
+  .profile-bio {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+  
+  .profile-location {
+    font-size: 14px;
+    color: #666;
+  }
+  
+  .profile-stats {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  
+  .stat {
+    text-align: center;
+  }
+  
+  .stat-label {
+    font-size: 14px;
+    color: #666;
+  }
+  
+  .stat-value {
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+
+  /* ProductManagement.css */
+.product-management {
+    max-width: 800px;
+    padding: 20px;
+  }
+  
+
+  
+  .product-list table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .product-list th,
+  .product-list td {
+    padding: 10px;
+    border: 1px solid #ccc;
+  }
+  
+  .product-list th {
+    background-color: #f0f0f0;
+    font-weight: bold;
+  }
+  
+  .product-list td button {
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+  
+  .product-list td button:hover {
+    background-color: #c82333;
+  }
+  
