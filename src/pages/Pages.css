@@ -48,47 +48,81 @@
     flex-wrap: wrap;
   }
 
-/* Profile.css */
-.profile-page {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
+/*ORDERS CSS*/
+.orders-container {
+  background-color: #fff;
   padding: 20px;
+  border-radius: 4px;
 }
 
-.avatar img {
-  width: 150px;
-  height: 150px;
+.orders-table {
+  border: 1px solid #e8e8e8;
+  border-radius: 4px;
+}
+
+.ant-table-thead > tr > th {
+  background-color: #f2f2f2;
+}
+
+.ant-table-tbody > tr > td {
+  border-bottom: 1px solid #e8e8e8;
+}
+
+.ant-table-tbody > tr:last-child > td {
+  border-bottom: none;
+}
+
+
+
+
+/* Profile.css */
+.profile-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f5f5f5;
+  border-radius: 4px;
+}
+
+.profile-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.profile-avatar {
+  width: 200px;
+  height: 200px;
   border-radius: 50%;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  object-fit: cover;
 }
 
-.details {
-  margin-left: 20px;
-}
-
-.details h2 {
+.profile-name {
+  margin-top: 10px;
   font-size: 24px;
+}
+
+.profile-username {
+  color: #888;
+  font-size: 16px;
+}
+
+.profile-content {
+  margin-top: 20px;
+}
+
+.profile-section {
+  margin-bottom: 20px;
+}
+
+.profile-section-heading {
+  font-size: 20px;
   margin-bottom: 10px;
 }
 
-.details p {
-  margin-bottom: 8px;
+.profile-info {
+  margin-bottom: 5px;
 }
 
-/* Hover effects */
-.avatar img:hover {
-  transform: scale(1.1);
-  transition: transform 0.3s ease-in-out;
-  cursor: pointer;
-}
-
-.details p:hover {
-  color: #1890ff;
-  cursor: pointer;
-  transition: color 0.3s ease-in-out;
-}
 
 
   /* ProductManagement.css */
@@ -165,6 +199,8 @@
     margin-top: 20px;
   }
   
+
+/*Comments*/
 
   .comments-container {
     display: flex;

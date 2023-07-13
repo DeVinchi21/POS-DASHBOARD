@@ -1,5 +1,6 @@
 import React from 'react';
 import { Table, Typography } from 'antd';
+import './Pages.css';
 
 const { Title } = Typography;
 
@@ -65,10 +66,10 @@ const Orders = () => {
   return (
     <div className='orders-container'>
       <Title level={3}>Kitchen Orders</Title>
-      <Table dataSource={kitchenOrdersData} columns={kitchenColumns} pagination={false} />
+      <Table dataSource={kitchenOrdersData} columns={kitchenColumns} pagination={false} className="orders-table" />
 
       <Title level={3}>Bar Orders</Title>
-      <Table dataSource={barOrdersData} columns={barColumns} pagination={false} />
+      <Table dataSource={barOrdersData} columns={barColumns} pagination={false} className="orders-table" />
     </div>
   );
 };

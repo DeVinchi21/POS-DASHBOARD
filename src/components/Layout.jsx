@@ -43,9 +43,6 @@ const Layout = ({ children }) => {
           <Menu.Item key="/dashboard" icon={<DashboardOutlined />}>
             <Link to="/dashboard">Dashboard</Link>
           </Menu.Item>
-          <Menu.Item key="/profile" icon={<UserOutlined />}>
-            <Link to="/profile">Profile</Link>
-          </Menu.Item>
           <Menu.Item key="/Orders" icon={<ShoppingCartOutlined />}>
             <Link to="/Orders">Orders</Link>
           </Menu.Item>
@@ -54,6 +51,9 @@ const Layout = ({ children }) => {
           </Menu.Item>
           <Menu.Item key="/Analytics" icon={<PieChartOutlined />}>
             <Link to="/Analytics">Analytics</Link>
+          </Menu.Item>
+          <Menu.Item key="/profile" icon={<UserOutlined />}>
+            <Link to="/profile">Profile</Link>
           </Menu.Item>
           <Menu.Item key="/" icon={<LogoutOutlined />}>
             <Link to="/">Logout</Link>
