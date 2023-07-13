@@ -36,44 +36,57 @@ const Login = () => {
   };
 
   return (
-    
-    <Card style={{ width: '400px', margin: '0 auto', marginTop: '100px' }}>
-      <Title level={3} style={{ textAlign: 'center' }}>
-        Login
-      </Title>
-      <Form name="login-form" onFinish={onFinish}>
-        <Form.Item
-          name="name"
-          rules={[{ required: true, message: 'Please enter your name!' }]}
-        >
-          <Input prefix={<UserOutlined />} placeholder="Name" />
-        </Form.Item>
+    <>
+      <div className='form--bg' 
+       style={{
+        width: '100vw',
+        height: '100vh',
+        backgroundColor: 'lightgrey',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        margin:'0',
+        padding:'0'
+      }}>
+        <Card style={{ width: '400px'}}>
+          <Title level={3} style={{ textAlign: 'center' }}>
+            Login
+          </Title>
+          <Form name="login-form" onFinish={onFinish}>
+            <Form.Item
+              name="name"
+              rules={[{ required: true, message: 'Please enter your name!' }]}
+            >
+              <Input prefix={<UserOutlined />} placeholder="Name" />
+            </Form.Item>
 
-        <Form.Item
-          name="password"
-          rules={[{ required: true, message: 'Please enter your password!' }]}
-        >
-          <Input.Password prefix={<LockOutlined />} placeholder="Password" />
-        </Form.Item>
+            <Form.Item
+              name="password"
+              rules={[{ required: true, message: 'Please enter your password!' }]}
+            >
+              <Input.Password prefix={<LockOutlined />} placeholder="Password" />
+            </Form.Item>
 
-        <Form.Item
-          name="department"
-          rules={[{ required: true, message: 'Please select your department!' }]}
-        >
-          <Select placeholder="Select department">
-            <Option value="Engineering">Engineering</Option>
-            <Option value="Marketing">Marketing</Option>
-            <Option value="Sales">Sales</Option>
-          </Select>
-        </Form.Item>
+            <Form.Item
+              name="department"
+              rules={[{ required: true, message: 'Please select your department!' }]}
+            >
+              <Select placeholder="Select department">
+                <Option value="Engineering">Engineering</Option>
+                <Option value="Marketing">Marketing</Option>
+                <Option value="Sales">Sales</Option>
+              </Select>
+            </Form.Item>
 
-        <Form.Item>
-          <Button type="primary" htmlType="submit" loading={loading} style={{ width: '100%' }}>
-            Log In
-          </Button>
-        </Form.Item>
-      </Form>
-    </Card>
+            <Form.Item>
+              <Button type="primary" htmlType="submit" loading={loading} style={{ width: '100%' }}>
+                Log In
+              </Button>
+            </Form.Item>
+          </Form>
+        </Card>
+      </div>
+    </>
   );
 };
 

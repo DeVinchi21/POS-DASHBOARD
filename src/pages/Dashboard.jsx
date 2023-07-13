@@ -9,7 +9,8 @@ import 'charts.css'
 import {
   UpCircleFilled,
   PoundCircleFilled,
-  WalletFilled
+  WalletFilled,
+  LineChartOutlined
 } from '@ant-design/icons';
 
 const Card = ({ title, value, icon }) => {
@@ -26,7 +27,10 @@ const Card = ({ title, value, icon }) => {
 
 const Dashboard = () => {
   return (
-    <><div className='stat--cards'>
+    <>
+    <h1>QUICK STATS</h1>
+    <hr/>
+    <div className='stat--cards'>
       <Card
         title="Profit"
         value="$10,000"
@@ -40,12 +44,12 @@ const Dashboard = () => {
         value="$50,000"
         icon={<WalletFilled />} />
       <Card
-        title="Custom Stat"
-        value="Custom Value"
-        icon={<i className="fas fa-cogs"></i>} />
+        title="Total Revenue"
+        value="$50,000"
+        icon={<LineChartOutlined/>} />
     </div>
     <hr />
-     <h1>More Data</h1>
+     <h1>DETAILS</h1>
      <CardsComponent/>
     </>
   );
@@ -66,16 +70,16 @@ const ordersData = [
 ];
 
 const transactionsData = [
-  { id: 1, date: '2023-07-10', amount: 100 },
-  { id: 2, date: '2023-07-11', amount: 150 },
-  { id: 3, date: '2023-07-12', amount: 200 },
+  { id: 1, date: '2023-07-10', amount: 100, method:'Cash' },
+  { id: 2, date: '2023-07-11', amount: 150 , method:'Mpesa'},
+  { id: 3, date: '2023-07-12', amount: 200, method:'Card'  },
 ];
 
 const salesData = [
-  { name: 'Product A', sales: 1000 },
+  { name: 'Product A', sales: 1000},
   { name: 'Product B', sales: 1500 },
-  { name: 'Product C', sales: 2000 },
-  { name: 'Product D', sales: 500 },
+  { name: 'Product C', sales: 2000},
+  { name: 'Product D', sales: 500},
 ];
 
 const CardsComponent = () => {
@@ -113,6 +117,7 @@ const CardsComponent = () => {
               <th>ID</th>
               <th>Date</th>
               <th>Amount</th>
+              <th>Method</th>
             </tr>
           </thead>
           <tbody>
@@ -121,6 +126,7 @@ const CardsComponent = () => {
                 <td>{transaction.id}</td>
                 <td>{transaction.date}</td>
                 <td>{transaction.amount}</td>
+                <td>{transaction.method}</td>
               </tr>
             ))}
           </tbody>

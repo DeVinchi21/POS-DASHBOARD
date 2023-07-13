@@ -1,145 +1,130 @@
-import React, { useState, useEffect } from 'react';
-import './Pages.css';
-import ProductDetails from '../components/ProductDetails';
+import React, { useState } from 'react';
+import { Table, Typography, Alert, Button, Modal, Form, Input } from 'antd';
 
-// Mock API
-const getProductsFromAPI = () => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve([
-        {
-          units: 'Pack',
-          discount: 10,
-          paymentmethod: 'Credit Card',
-          amount: 100,
-          supplier_name: 'Supplier A',
-          supplier: 'Supplier A',
-          category: 'Electronics',
-          id: 1,
-          tax: 5,
-          item_name: 'Product 1',
-          quantity: 5,
-        },
-        // Add more mock data here
-      ]);
-    }, 1000);
-  });
-};
+const { Title } = Typography;
 
-const deleteProductFromAPI = (id) => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve();
-    }, 500);
-  });
-};
+const inventoryData = [
+  { id: 1, name: 'Product 1', quantity: 10 },
+  { id: 2, name: 'Product 2', quantity: 5 },
+  { id: 3, name: 'Product 3', quantity: 15 },
+  { id: 4, name: 'Product 4', quantity: 3 },
+  { id: 5, name: 'Product 5', quantity: 8 },
+];
 
-const saveProductToAPI = (product) => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(product);
-    }, 500);
-  });
-};
+const Inventory = () => {
+  const [showUpdateModal, setShowUpdateModal] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [form] = Form.useForm();
 
-const ProductManagement = () => {
-  const [products, setProducts] = useState([]);
-  const [newProduct, setNewProduct] = useState(null);
-  const [editingProduct, setEditingProduct] = useState(null);
-
-  useEffect(() => {
-    fetchProducts();
-  }, []);
-
-  const fetchProducts = async () => {
-    const data = await getProductsFromAPI();
-    setProducts(data);
+  const handleEdit = (product) => {
+    setSelectedProduct(product);
+    setShowUpdateModal(true);
   };
 
-  const deleteProduct = async (id) => {
-    await deleteProductFromAPI(id);
-    setProducts(products.filter((product) => product.id !== id));
+  const handleDelete = (productId) => {
+    // Handle delete functionality
+    console.log(`Delete product with ID: ${productId}`);
   };
 
-  const saveProduct = async () => {
-    if (!newProduct) return;
-
-    if (editingProduct) {
-      // Update existing product
-      const updatedProduct = await saveProductToAPI(newProduct);
-      setProducts(products.map((product) => (product.id === updatedProduct.id ? updatedProduct : product)));
-      setEditingProduct(null);
-    } else {
-      // Add new product
-      const product = { ...newProduct };
-      product.id = Date.now(); // Generate a temporary unique ID
-      await saveProductToAPI(product);
-      setProducts([...products, product]);
-    }
-
-    setNewProduct(null);
+  const handleUpdate = (values) => {
+    // Update the product details
+    console.log('Updated product:', values);
+    setShowUpdateModal(false);
+    form.resetFields();
   };
 
-  const editProduct = (product) => {
-    setNewProduct(product);
-    setEditingProduct(product.id);
-  };
-
-  const handleEdit = (updatedProduct) => {
-    setNewProduct(updatedProduct);
-  };
-
-  const headers = [
-    { label: 'Item Name', key: 'item_name' },
-    { label: 'Units', key: 'units' },
-    { label: 'Discount', key: 'discount' },
-    { label: 'Payment Method', key: 'paymentmethod' },
-    { label: 'Amount', key: 'amount' },
-    { label: 'Supplier Name', key: 'supplier_name' },
-    { label: 'Supplier', key: 'supplier' },
-    { label: 'Category', key: 'category' },
-    { label: 'Tax', key: 'tax' },
-    { label: 'Quantity', key: 'quantity' },
+  const columns = [
+    {
+      title: 'ID',
+      dataIndex: 'id',
+      key: 'id',
+    },
+    {
+      title: 'Product Name',
+      dataIndex: 'name',
+      key: 'name',
+    },
+    {
+      title: 'Quantity',
+      dataIndex: 'quantity',
+      key: 'quantity',
+    },
+    {
+      title: 'Action',
+      key: 'action',
+      render: (_, product) => (
+        <>
+          <Button type="primary" onClick={() => handleEdit(product)}>
+            Edit
+          </Button>
+          <Button type="danger" onClick={() => handleDelete(product.id)}>
+            Delete
+          </Button>
+        </>
+      ),
+    },
   ];
 
+  const lowInventoryThreshold = 5; // Define the low inventory threshold
+
+  const lowInventoryProducts = inventoryData.filter(
+    (product) => product.quantity < lowInventoryThreshold
+  );
+
   return (
-    <div className="product-management">
-      <h1>Product Management System</h1>
-
-      <div className="product-form">
-        <h2>{editingProduct ? 'Edit Product' : 'Add Product'}</h2>
-        <ProductDetails product={newProduct} handleEdit={handleEdit} />
-        <button onClick={saveProduct}>{editingProduct ? 'Save Changes' : 'Add Product'}</button>
-      </div>
-
-      <div className="product-list">
-        <h2>Product List</h2>
-        <table>
-          <thead>
-            <tr>
-              {headers.map((header) => (
-                <th key={header.key}>{header.label}</th>
-              ))}
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {products.map((product) => (
-              <tr key={product.id}>
-                {headers.map((header) => (
-                  <td key={header.key}>{product[header.key]}</td>
+    <div className='inventory-container'>
+      <Title level={3}>Inventory</Title>
+      {lowInventoryProducts.length > 0 && (
+        <Alert
+          message="Low Inventory Alert"
+          description={
+            <>
+              <p>The following products have low inventory:</p>
+              <ul>
+                {lowInventoryProducts.map((product) => (
+                  <li key={product.id}>
+                    {product.name} (ID: {product.id}) - Quantity: {product.quantity}
+                  </li>
                 ))}
-                <td>
-                  <button onClick={() => editProduct(product)}>Edit</button>
-                  <button onClick={() => deleteProduct(product.id)}>Delete</button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+              </ul>
+            </>
+          }
+          type="warning"
+          showIcon
+        />
+      )}
+      <Table dataSource={inventoryData} columns={columns} pagination={false} />
+
+      <Modal
+        title="Update Product"
+        visible={showUpdateModal}
+        onCancel={() => setShowUpdateModal(false)}
+        footer={null}
+      >
+        <Form form={form} onFinish={handleUpdate} initialValues={{ ...selectedProduct }}>
+          <Form.Item
+            name="name"
+            label="Product Name"
+            rules={[{ required: true, message: 'Please enter the product name' }]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item
+            name="quantity"
+            label="Quantity"
+            rules={[{ required: true, message: 'Please enter the quantity' }]}
+          >
+            <Input type="number" />
+          </Form.Item>
+          <Form.Item>
+            <Button type="primary" htmlType="submit">
+              Update
+            </Button>
+          </Form.Item>
+        </Form>
+      </Modal>
     </div>
   );
 };
 
-export default ProductManagement;
+export default Inventory;
