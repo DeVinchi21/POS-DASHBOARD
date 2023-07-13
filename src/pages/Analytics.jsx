@@ -1,36 +1,65 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import './Pages.css';
+import React from 'react';
+import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
+import './Charts.css';
 
-const CommentsList = () => {
-  const [comments, setComments] = useState([]);
+const data = [
+  { month: 'Jan', avgRoomRate: 150, occupancy: 0.8, revenuePerRoom: 120 },
+  { month: 'Feb', avgRoomRate: 160, occupancy: 0.7, revenuePerRoom: 112 },
+  { month: 'Mar', avgRoomRate: 170, occupancy: 0.9, revenuePerRoom: 153 },
+  { month: 'Apr', avgRoomRate: 180, occupancy: 0.8, revenuePerRoom: 144 },
+  { month: 'May', avgRoomRate: 190, occupancy: 0.7, revenuePerRoom: 133 },
+  { month: 'Jun', avgRoomRate: 200, occupancy: 0.9, revenuePerRoom: 180 },
+];
 
-  useEffect(() => {
-    const fetchComments = async () => {
-      try {
-        const response = await axios.get('https://dummyjson.com/comments'); // Replace with your API endpoint
-        setComments(response.data.comments);
-      } catch (error) {
-        console.error('Error fetching comments:', error);
-      }
-    };
-
-    fetchComments();
-  }, []);
-
+const Charts = () => {
   return (
-    <div className="comments-container">
-      {comments.map((comment) => (
-        <div key={comment.id} className="comment-card">
-          <div className="comment-avatar">{comment.user.username.charAt(0)}</div>
-          <div className="comment-content">
-            <div className="comment-author">{comment.user.username}</div>
-            <div className="comment-body">{comment.body}</div>
-          </div>
+    <>
+      <h1>PERFOMANCE ANALYTICS</h1>
+      <div className="charts-container">
+
+        <div className="chart-card">
+          <h3>Average Room Rate</h3>
+          <ResponsiveContainer width="100%" height={300}>
+            <LineChart data={data}>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="month" />
+              <YAxis />
+              <Tooltip />
+              <Legend />
+              <Line type="monotone" dataKey="avgRoomRate" stroke="#8884d8" />
+            </LineChart>
+          </ResponsiveContainer>
         </div>
-      ))}
-    </div>
+
+        <div className="chart-card">
+          <h3>Occupancy</h3>
+          <ResponsiveContainer width="100%" height={300}>
+            <LineChart data={data}>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="month" />
+              <YAxis />
+              <Tooltip />
+              <Legend />
+              <Line type="monotone" dataKey="occupancy" stroke="#82ca9d" />
+            </LineChart>
+          </ResponsiveContainer>
+        </div>
+
+        <div className="chart-card">
+          <h3>Revenue per Room</h3>
+          <ResponsiveContainer width="100%" height={300}>
+            <LineChart data={data}>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="month" />
+              <YAxis />
+              <Tooltip />
+              <Legend />
+              <Line type="monotone" dataKey="revenuePerRoom" stroke="#ffc658" />
+            </LineChart>
+          </ResponsiveContainer>
+        </div>
+      </div></>
   );
 };
 
-export default CommentsList;
+export default Charts;
