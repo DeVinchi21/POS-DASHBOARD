@@ -77,7 +77,7 @@ const BookingsChart = () => {
     { week: 'Week 2', bookings: 15 },
     { week: 'Week 3', bookings: 8 },
     { week: 'Week 4', bookings: 12 },
-    // Add more weeks and bookings data as needed
+    
   ];
 
   const revenueData = [
@@ -85,7 +85,7 @@ const BookingsChart = () => {
     { week: 'Week 2', revenue: 750 },
     { week: 'Week 3', revenue: 600 },
     { week: 'Week 4', revenue: 900 },
-    // Add more weeks and revenue data as needed
+    
   ];
 
   return (

@@ -18,7 +18,7 @@ const Login = () => {
 
   const onFinish = (values) => {
     setLoading(true);
-    // Simulating login logic
+    
     setTimeout(() => {
       const { name, password, department } = values;
       const user = usersData.find(
@@ -27,7 +27,7 @@ const Login = () => {
       if (user) {
         console.log('Login successful!', user);
         setLoading(false);
-        navigate('/dashboard'); // Navigate to dashboard on successful login
+        navigate('/dashboard'); // go to dashboard
       } else {
         console.log('Login failed! Invalid credentials');
         setLoading(false);

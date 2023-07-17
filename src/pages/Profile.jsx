@@ -7,7 +7,7 @@ const Profile = () => {
     lastName: 'Doe',
     username: 'johndoe',
     email: 'johndoe@example.com',
-    avatar: 'https://dummyimage.com/200x200',
+    avatar: "https://eu.ui-avatars.com/api/?name=John+Doe&size=250",
     bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer gravida vestibulum justo, id lobortis neque accumsan at. Sed pharetra sem mi, a eleifend enim sollicitudin at.',
   };
 

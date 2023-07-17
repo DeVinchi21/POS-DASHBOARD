@@ -22,12 +22,12 @@ const Inventory = () => {
   };
 
   const handleDelete = (productId) => {
-    //delete functionality
+   
     console.log(`Delete product with ID: ${productId}`);
   };
 
   const handleUpdate = (values) => {
-    // the product details
+    
     console.log('Updated product:', values);
     setShowUpdateModal(false);
     form.resetFields();
@@ -65,7 +65,7 @@ const Inventory = () => {
     },
   ];
 
-  const lowInventoryThreshold = 5; // Define what threshold should be used 
+  const lowInventoryThreshold = 5; // Set the limit for low inventory
 
   const lowInventoryProducts = inventoryData.filter(
     (product) => product.quantity < lowInventoryThreshold
