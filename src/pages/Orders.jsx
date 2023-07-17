@@ -1,8 +1,6 @@
-import React from 'react';
-import { Table, Typography } from 'antd';
+import { Table } from 'antd';
 import './Pages.css';
 
-const { Title } = Typography;
 
 const kitchenOrdersData = [
   { id: 1, order: 'Burger', quantity: 2, status: 'In Progress' },
@@ -65,10 +63,10 @@ const Orders = () => {
 
   return (
     <div className='orders-container'>
-      <Title level={3}>Kitchen Orders</Title>
+      <h1 className="header--titles">Kitchen Orders</h1>
       <Table dataSource={kitchenOrdersData} columns={kitchenColumns} pagination={false} className="orders-table" />
 
-      <Title level={3}>Bar Orders</Title>
+      <h1 className="header--titles">Bar Orders</h1>
       <Table dataSource={barOrdersData} columns={barColumns} pagination={false} className="orders-table" />
     </div>
   );

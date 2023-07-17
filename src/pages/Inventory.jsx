@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { Table, Typography, Alert, Button, Modal, Form, Input } from 'antd';
+import { useState } from 'react';
+import { Table, Alert, Button, Modal, Form, Input } from 'antd';
 
-const { Title } = Typography;
+import './Pages.css';
 
 const inventoryData = [
   { id: 1, name: 'Product 1', quantity: 10 },
@@ -73,7 +73,7 @@ const Inventory = () => {
 
   return (
     <div className='inventory-container'>
-      <Title level={3}>Inventory</Title>
+      <h1 className="header--titles"> Inventory</h1>
       {lowInventoryProducts.length > 0 && (
         <Alert
           message="Low Inventory Alert"

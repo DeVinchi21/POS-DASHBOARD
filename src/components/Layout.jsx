@@ -12,6 +12,8 @@ import {
 } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 
+import './Layout.css';
+
 const { Sider, Content } = AntdLayout;
 
 const Layout = ({ children }) => {
@@ -19,7 +21,7 @@ const Layout = ({ children }) => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const handleLogout = () =>{
+  const handleLogout = () => {
     navigate('/');
   }
 
@@ -61,18 +63,24 @@ const Layout = ({ children }) => {
         </Menu>
       </Sider>
       <AntdLayout>
-        
-        <Content style={{ padding: '16px' }}>{children}</Content>
+
+        <Content style={{ padding: '16px' }}>
+          <header className="header-container">
+            <h1 className="header-title">HOTEL DASHBOARD</h1>
+          </header>
+          <hr/>
+          {children}
+        </Content>
       </AntdLayout>
     </AntdLayout>
   );
 };
 
 Layout.propTypes = {
-    children: PropTypes.oneOfType([
-      PropTypes.arrayOf(PropTypes.node),
-      PropTypes.node
-    ]).isRequired,
-  };
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node
+  ]).isRequired,
+};
 
 export default Layout;

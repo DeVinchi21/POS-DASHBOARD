@@ -28,7 +28,7 @@ const Card = ({ title, value, icon }) => {
 const Dashboard = () => {
   return (
     <>
-    <h1>QUICK STATS</h1>
+    <h1 className='header--titles'>QUICK STATS</h1>
     <hr/>
     <div className='stat--cards'>
       <Card
@@ -49,7 +49,7 @@ const Dashboard = () => {
         icon={<LineChartOutlined/>} />
     </div>
     <hr />
-     <h1>DETAILS</h1>
+     <h1 className='header--titles'>DETAILS</h1>
      <CardsComponent/>
     </>
   );

@@ -1,4 +1,3 @@
-import React from 'react';
 import './Pages.css';
 
 const Profile = () => {
@@ -31,7 +30,8 @@ const Profile = () => {
   }, []);
  */
   return (
-    <div className="profile-container">
+    <><h1 className='header--titles'>Profile</h1><div className="profile-container">
+
       <div className="profile-header">
         <img src={user.avatar} alt="User Avatar" className="profile-avatar" />
         <h1 className="profile-name">{user.firstName} {user.lastName}</h1>
@@ -44,7 +44,7 @@ const Profile = () => {
           <p className="profile-info">Bio: {user.bio}</p>
         </div>
       </div>
-    </div>
+    </div></>
   );
 };
 

@@ -1,6 +1,9 @@
-import React from 'react';
 import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
+import { BarChart, Bar } from 'recharts';
+
 import './Charts.css';
+
+import './Pages.css';
 
 const data = [
   { month: 'Jan', avgRoomRate: 150, occupancy: 0.8, revenuePerRoom: 120 },
@@ -14,7 +17,7 @@ const data = [
 const Charts = () => {
   return (
     <>
-      <h1>PERFOMANCE ANALYTICS</h1>
+      <h1 className='header--titles'>PERFOMANCE ANALYTICS</h1>
       <div className="charts-container">
 
         <div className="chart-card">
@@ -58,8 +61,65 @@ const Charts = () => {
             </LineChart>
           </ResponsiveContainer>
         </div>
-      </div></>
+
+      </div>
+      <BookingsChart />
+    </>
   );
 };
 
 export default Charts;
+
+
+const BookingsChart = () => {
+  const bookingsData = [
+    { week: 'Week 1', bookings: 10 },
+    { week: 'Week 2', bookings: 15 },
+    { week: 'Week 3', bookings: 8 },
+    { week: 'Week 4', bookings: 12 },
+    // Add more weeks and bookings data as needed
+  ];
+
+  const revenueData = [
+    { week: 'Week 1', revenue: 500 },
+    { week: 'Week 2', revenue: 750 },
+    { week: 'Week 3', revenue: 600 },
+    { week: 'Week 4', revenue: 900 },
+    // Add more weeks and revenue data as needed
+  ];
+
+  return (
+    <>
+      <h1 className='header--titles'>BOOKINGS & REVENUE DATA</h1>
+      <div className="charts-container">
+        <div className="chart-card">
+          <h3>Booking Data</h3>
+          <ResponsiveContainer width="100%" height={300}>
+            <BarChart data={bookingsData}>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="week" />
+              <YAxis />
+              <Tooltip />
+              <Legend />
+              <Bar dataKey="bookings" fill="#8884d8" />
+            </BarChart>
+          </ResponsiveContainer>
+        </div>
+
+        <div className="chart-card">
+          <h3>Revenue Data</h3>
+          <ResponsiveContainer width="100%" height={300}>
+            <BarChart data={revenueData}>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="week" />
+              <YAxis />
+              <Tooltip />
+              <Legend />
+              <Bar dataKey="revenue" fill="#82ca9d" />
+            </BarChart>
+          </ResponsiveContainer>
+        </div>
+      </div>
+    </>
+  );
+};

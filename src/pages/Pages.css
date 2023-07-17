@@ -72,6 +72,13 @@
   border-bottom: none;
 }
 
+/*DASHBOARD CSS*/
+.header--titles{
+  background-color: #474747;
+  border-left: 4px solid rgb(106, 177, 0);
+  padding: 1rem;
+  color: white;
+}
 
 
 

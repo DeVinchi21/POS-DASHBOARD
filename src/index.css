@@ -1,4 +1,25 @@
+/* Target the scrollbar track */
+::-webkit-scrollbar-track {
+  background-color: #f1f1f1; /* Change the background color */
+}
+
+/* Target the scrollbar thumb */
+::-webkit-scrollbar-thumb {
+  background-color: #f79393; /* Change the thumb color */
+}
+
+/* Target the scrollbar thumb on hover */
+::-webkit-scrollbar-thumb:hover {
+  background-color: #ff6969; /* Change the thumb color on hover */
+}
+
+/* Target the scrollbar corner */
+::-webkit-scrollbar-corner {
+  background-color: #f1f1f1; /* Change the corner color */
+}
+
 body{
   margin: 0;
   padding: 0;
 }
+
