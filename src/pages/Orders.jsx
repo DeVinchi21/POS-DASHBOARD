@@ -1,6 +1,7 @@
 import { Table } from 'antd';
 import './Pages.css';
 
+//Make edits to the page to show more info 
 
 const kitchenOrdersData = [
   { id: 1, order: 'Burger', quantity: 2, status: 'In Progress' },
