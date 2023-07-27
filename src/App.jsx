@@ -9,6 +9,7 @@ import Layout from './components/Layout';
 import Inventory from './pages/Inventory';
 import Orders from './pages/Orders';
 import Analytics from './pages/Analytics'
+import EmployeeSchedule from './pages/Employes';
 
 
 const App = () => (
@@ -19,6 +20,7 @@ const App = () => (
     <Route path='/profile' element={<Layout><Profile /></Layout>} />
     <Route path='/inventory' element={<Layout><Inventory data={mockStoreData} /></Layout>} />
     <Route path='/Orders' element={<Layout><Orders/></Layout>}/>
+    <Route path='/employees' element={<Layout><EmployeeSchedule/></Layout>}/>
     <Route path='/Analytics' element={<Layout><Analytics/></Layout>}/>
 
   </Routes>
